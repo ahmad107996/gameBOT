@@ -82,6 +82,6 @@ client.user.setStatus("dnd")
 
 
 
-client.login(process.env.BOT_TOKEN);// لا تغير فيها شيء
-client2.login(process.env.BOT_TOKEN2);
-client3.login(process.env.BOT_TOKEN3);
+
+client.login(process.env.TOKEN);// لا تغير فيها شيء
+client2.login(process.env.TOKEN2);// لا تغير فيها شيء
