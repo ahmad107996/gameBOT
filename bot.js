@@ -70,7 +70,7 @@ client.on('message', message => {
 client.on('message', message => {
     if (message.content === '^help') {
         let helpEmbed = new Discord.RichEmbed()
-        .setTitle('**أوامر الادمن...**')
+        .setTitle('**أوامر الاعاب...**')
         .setDescription('**برفكس البوت (^)**')
         .addField('fast', 'اسرع كتابه')
         .addField('fortnite', 'لعبه اسئله فورت نايت')
@@ -78,6 +78,7 @@ client.on('message', message => {
        .addField('صراحة', 'لعبة صراحة')
 	 .addField('لو خيروك', 'لعبة لو خيروك')
 		 .addField('عقاب', 'لعبة عقاب')
+      message.channel.send(helpEmbed);
 
     }
 });
