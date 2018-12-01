@@ -66,6 +66,63 @@ client.on('message', message => {
     }
 })
 
+const x5bz4 = [
+   '*** انا اسمي مريم ***',
+   '*** مرحباَ ماهو اسمك ؟ ***',
+   `*** اهلا بك ! انا تائهه في هذا المكان  ***`,
+   '*** هل تود مساعدتي ؟ ***',
+   '*** لماذا هل انت قاسي القلب ؟ ***',
+   '*** انني اشفق عليك عليك يجب ان تطهر روحك وتحب الخير للجميع ***',
+   '*** ابتعد عني قليل انني متعبة ***',
+   '*** هل انت نادم على ماقلت ؟ ***',
+   '*** ابتعد عني قليل انني متعبة ***',
+   '*** هل انت نادم على ماقلت ؟ ***',
+   '*** هل تود مساعدتي ؟ ***',
+   '*** واو اشك??ك انك شخصاَ رائع ! ***',
+   '*** ابحث معي عن منزلي لقد كان قريباَ من هنا ***',
+   '*** ولاكن عندما حل الليل لم اعد ارى اي شيء ***',
+   '*** مذا تظن اين يوجد ؟ يمين او يسار ***',
+   '*** هيا اذاَ ***',
+   '*** اود ان اسئلك سؤال ونحن في الطريق ***',
+   '*** هل تراني فتاة لطيفة ام مخيفة ***',
+   '*** اشكرك !  ***',
+   '*** لقد وصلنا الى المنزل شكراَ جزيلَ انتطرني ثواني وسوف اعود ***',
+   '*** هل انت جاهز ؟ ***',
+   '*** لقد اخبرت والدي عنك وهم متحمسين لرؤيتك ***',
+   '*** هل تود ان تراهم الان ***',
+   '*** انا لست الحوت الازرق كما يدعون ***',
+   '*** انا لست كاذبة صدقني***',
+   '*** لماذا ارى في عينيك الخوف ؟ ***',
+   '*** انا مجرد فتاة لطيفة تحب اللعب مع الجميع ***',
+   '*** اعرف كل شيء يحدث اسمع ذالك بالراديو ***',
+   '*** سمعت ان البشر يقتلون من اجل المال فقط ***',
+   '*** لماذا لم تدخل الغرفة ؟ ***',
+   '*** ههههههههههههههههههه انت الان مسجون في هذه الغرفة ***',
+   '*** لن تخرج حتى اعود لك بعد قليل ***',
+   '*** المفت????ح معك ! اكتب .مريم  ***',
+   '*** مفتاح احمر , هل حصلت عليه ؟ ***',
+   '*** ان لم تحصل عليه , اكتب .مريم مرة اخرى ***',
+   '*** مفتاح اسود . هل حصلت عليه ؟ ***',
+   '*** اين تريد ان تختبئ بسرعة قبل ان تعود ***',
+   '*** لقد عادت من جديد الى المنزل ***',
+   '*** لا تصدر اي صوت ! ***',
+   '*** مريم : لقد عدت ***',
+   '*** مريم : يا ايها ا??مخادع اين انت ***',
+   '*** مريم : اعلم انك هنا في المنزل ***',
+   '*** مريم : ماذا تريد ان تسمع ***',
+   '*** مريم : اضغط على الرابط اهداء مني لك | https://www.youtube.com/watch?v=hvSiuQccmtg ***',
+   '*** احد ما خرج من المنزل ***']
+ client.on('message', message => {
+ if (message.content.startsWith('^مريم')) {
+  var mariam= new Discord.RichEmbed()
+  .setTitle("لعبة مريم ..")
+  .setColor('RANDOM')
+  .setDescription(`${x5bz4[Math.floor(Math.random() * x5bz4.length)]}`)
+  .setImage("https://media.discordapp.net/attachments/510952853125464083/518370030782775296/Z.png")
+   message.channel.sendEmbed(mariam);
+   message.react(":tada:")
+  }
+});
 
 client.on('message', message => {
     if (message.content === '^help') {
@@ -78,11 +135,132 @@ client.on('message', message => {
        .addField('صراحة', 'لعبة صراحة')
 	 .addField('لو خيروك', 'لعبة لو خيروك')
 		 .addField('عقاب', 'لعبة عقاب')
+	.addField('مريم', 'لعبة ممريم')
+	.addField('فكك', 'لعبة تفكيك الكلمات')
+        .addField('mypoints', 'معرفت نقاتك في فكك')
+	.addField('xo', 'لعبة اكس او')
       message.channel.send(helpEmbed);
 
     }
 });
 
+
+client.on('message' , message => {
+  if(message.author.bot) return;
+ 
+  if(message.content.startsWith(prefix + "xo")) {
+ let array_of_mentions = message.mentions.users.array();
+  let symbols = [':o:', ':heavy_multiplication_x:']
+  var grid_message;
+ 
+  if (array_of_mentions.length == 1 || array_of_mentions.length == 2) {
+    let random1 = Math.floor(Math.random() * (1 - 0 + 1)) + 0;
+    let random2 = Math.abs(random1 - 1);
+    if (array_of_mentions.length == 1) {
+      random1 = 0;
+      random2 = 0;
+    }
+    var player1_id = message.author.id
+    let player2_id = array_of_mentions[random2].id;
+    var turn_id = player1_id;
+    var symbol = symbols[0];
+    let initial_message = `Game match between <@${player1_id}> and <@${player2_id}>!`;
+    if (player1_id == player2_id) {
+      initial_message += '\n_( ألعب مع نفسك)_'
+    }
+    message.channel.send(`Xo ${initial_message}`)
+    .then(console.log("Successful tictactoe introduction"))
+    .catch(console.error);
+    message.channel.send(':one::two::three:' + '\n' +
+                         ':four::five::six:' + '\n' +
+                         ':seven::eight::nine:')
+    .then((new_message) => {
+      grid_message = new_message;
+    })
+    .then(console.log("Successful tictactoe game initialization"))
+    .catch(console.error);
+    message.channel.send('يجب الانتضار حيث ما يتم الموافقه')
+    .then(async (new_message) => {
+      await new_message.react('1⃣');
+      await new_message.react('2⃣');
+      await new_message.react('3⃣');
+      await new_message.react('4⃣');
+      await new_message.react('5⃣');
+      await new_message.react('6⃣');
+      await new_message.react('7⃣');
+      await new_message.react('8⃣');
+      await new_message.react('9⃣');
+      await new_message.react('🆗');
+      await new_message.edit(`It\'s <@${turn_id}>\'s turn! Your symbol is ${symbol}`)
+      .then((new_new_message) => {
+        require('./xo.js')(client, message, new_new_message, player1_id, player2_id, turn_id, symbol, symbols, grid_message);
+      })
+      .then(console.log("Successful tictactoe listener initialization"))
+      .catch(console.error);
+    })
+    .then(console.log("Successful tictactoe react initialization"))
+    .catch(console.error);
+  }
+  else {
+    message.reply(`منشن مع من تريد ألعب`)
+    .then(console.log("Successful error reply"))
+    .catch(console.error);
+  }
+}
+ });
+let points = JSON.parse(fs.readFileSync('./points.json', 'utf8'));
+client.on('message', message => {
+if (!points[message.author.id]) points[message.author.id] = {
+    points: 0,
+  };
+if (message.content.startsWith(prefix + 'فكك')) {
+    if(!message.channel.guild) return message.reply('**:no_entry: , هذا الأمر للسيرفرات فقط**').then(m => m.delete(3000));
+
+const type = require('./fkk.json');
+const item = type[Math.floor(Math.random() * type.length)];
+const filter = response => {
+    return item.answers.some(answer => answer.toLowerCase() === response.content.toLowerCase());
+};
+message.channel.send('**:timer: , لديك »15« ثانية فقط لتفكيك هذه الكلمة**').then(msg => {
+let embed = new Discord.RichEmbed()
+.setColor("RANDOM")
+.setImage(`${item.type}`)
+msg.channel.send(embed).then(() => {
+        message.channel.awaitMessages(filter, { maxMatches: 1, time: 15000, errors: ['time'] })
+        .then((collected) => {
+         const sh = new Discord.RichEmbed()
+.setColor("RANDOM")
+.setDescription('**:tada: , جيد , لقد حصلت على نقطة**')
+.addField('g!mypoints اكتب', 'لرؤية نقاطك' , true)
+.setFooter(message.author.username, message.author.avatarURL)
+message.channel.sendEmbed(sh);
+        let won = collected.first().author;
+                points[won.id].points++;
+        })
+           .catch(collected => {
+            message.channel.send(`**:timer: , انتهئ الوقت , ولم يقم احد بتفكيك الكلمة**`);
+           })
+          fs.writeFile("./points.json", JSON.stringify(points), (err) => {
+    if (err) console.error(err)
+          })
+        })
+    })
+}
+})
+client.on('message', message => {
+if (message.content.startsWith(prefix + 'mypoints')) {
+	if(!message.channel.guild) return message.reply('**:no_entry: , هذا الأمر للسيرفرات فقط**').then(m => m.delete(3000));
+	let userData = points[message.author.id];
+	let embed = new Discord.RichEmbed()
+    .setAuthor(`${message.author.tag}`, message.author.avatarURL)
+	.setColor('#000000')
+	.setDescription(`\`${userData.points}`\ : نقاطك`)
+	message.channel.sendEmbed(embed)
+  }
+  fs.writeFile("./points.json", JSON.stringify(points), (err) => {
+    if (err) console.error(err)
+  })
+});
 const Za7f = [
     "**صورة وجهك او رجلك او خشمك او يدك**.",
     "**اصدر اي صوت يطلبه منك الاعبين**.",
