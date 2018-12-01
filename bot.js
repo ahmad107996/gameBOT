@@ -68,7 +68,7 @@ client.on('message', message => {
 
 
 client2.on('message', message => {
-    if (message.content === '#help') {
+    if (message.content === '^help') {
         let helpEmbed = new Discord.RichEmbed()
         .setTitle('**أوامر الادمن...**')
         .setDescription('**برفكس البوت (^)**')
@@ -188,7 +188,7 @@ client.on('ready', () => {
       console.log(`ON ${client.guilds.size} Servers '     Script By : DREAM ' `);
     console.log(`----------------`);
   console.log(`Logged in as ${client.user.tag}!`);
-client.user.setGame(`^fast | ${client.guilds.size} / ${client.users.size} servers/user`,"http://twitch.tv/YouTube")
+client.user.setGame(`^help | ${client.guilds.size} / ${client.users.size} servers/user`,"http://twitch.tv/YouTube")
 client.user.setStatus("dnd")
 });
 
