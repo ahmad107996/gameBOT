@@ -194,7 +194,7 @@ client.on('message' , message => {
       await new_message.react('9⃣');
       await new_message.react('🆗');
       await new_message.edit(`It\'s <@${turn_id}>\'s turn! Your symbol is ${symbol}`)
-      .then((new_new_message) => {
+     
       })
       .then(console.log("Successful tictactoe listener initialization"))
       .catch(console.error);
