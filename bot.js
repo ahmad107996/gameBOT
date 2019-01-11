@@ -1,9 +1,14 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const fs = require('fs');
+const points = JSON.parse(fs.readFileSync('./points.json', 'utf8'));
+
 
 var prefix = "^"; 
 client.on('message', message => {
+	if (!points[message.author.id]) points[message.author.id] = {
+    points: 0,
+  };
     if (message.content == "^fast") {
         var x = ["DreamKing",
 "DeathGames",
@@ -60,7 +65,8 @@ client.on('message', message => {
             return message.channel.send(`:negative_squared_cross_mark: لقد انتهى الوقت ولم يقم أحد بالأجابة بشكل صحيح 
             الإجآبة الصحيحةة هي __**${x2[x3]}**__`)
         })
-        
+               fs.writeFile("./points.json", JSON.stringify(points), (err) => {
+    if (err) console.error(err)
         r.then((collected)=> {
             message.channel.send(`${collected.first().author} لقد قمت بكتابة الكلمة في الوقت المناسب  `);
         })
@@ -145,8 +151,6 @@ client.on('message', message => {
 
     }
 });
-
-
 client.on('message' , message => {
   if(message.author.bot) return;
  
@@ -194,7 +198,8 @@ client.on('message' , message => {
       await new_message.react('9⃣');
       await new_message.react('🆗');
       await new_message.edit(`It\'s <@${turn_id}>\'s turn! Your symbol is ${symbol}`)
-     
+      .then((new_new_message) => {
+        require('./xo.js')(client, message, new_new_message, player1_id, player2_id, turn_id, symbol, symbols, grid_message);
       })
       .then(console.log("Successful tictactoe listener initialization"))
       .catch(console.error);
@@ -209,6 +214,7 @@ client.on('message' , message => {
   }
 }
  });
+let points = JSON.parse(fs.readFileSync('./points.json', 'utf8'));
 client.on('message', message => {
 if (!points[message.author.id]) points[message.author.id] = {
     points: 0,
